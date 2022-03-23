@@ -3,23 +3,19 @@ import './App.css';
 import React from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
 import $ from 'jquery';
-
+import { Route,Switch } from 'react-router-dom';
 import MyTable from './Components/MyTable';
+import SelectedTable from './Components/SelectedTable';
 export default class App extends React.Component{
-  state={
-        post:[]
-  }
-  async componentDidMount(){
-  await  $.get('https://api.spacexdata.com/v3/capsules', (post)=>{
-      this.setState({post});
-    })
-  }
+  
   render(){
-    let {post}=this.state;
-    console.log(post);
   return (
     <div className="App">
-          <MyTable post={post}/>
+          <Switch>
+            <Route path="/" exact render={(props)=><MyTable {...props}/>}/>
+            <Route path="/:id" render={(props)=><SelectedTable {...props}/>}/>
+          </Switch>
+         
     </div>
   )
 }

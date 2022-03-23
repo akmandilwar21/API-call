@@ -1,11 +1,27 @@
 import * as React from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,Button} from '@material-ui/core';
-
+import $ from 'jquery';
 
 export default class MyTable extends React.Component {
+  state={
+    post:[]
+}
+async componentDidMount(){
+await  $.get('https://api.spacexdata.com/v3/capsules', (post)=>{
+  this.setState({post});
+})
+}
+
+  handleClick = id=>{
+    let path = this.props.location.pathname;
+    path = path + id;
+    console.log(path);
+    this.props.history.push({pathname:path});
+         
+  }
    
   render(){
-      let {post}=this.props;
+      let {post}=this.state;
     console.log(post); 
       return (
         <TableContainer component={Paper}>
@@ -34,7 +50,7 @@ export default class MyTable extends React.Component {
                 <TableCell align="center">{row.original_launch}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">{row.type}</TableCell>
-                <TableCell><Button color="primary" variant="contained"> View</Button></TableCell>
+                <TableCell><Button color="primary" variant="contained" onClick={()=>this.handleClick(row.capsule_serial)}> View</Button></TableCell>
               </TableRow>
             ))}
           </TableBody>
