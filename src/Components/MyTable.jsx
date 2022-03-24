@@ -52,7 +52,7 @@ await  $.get('https://api.spacexdata.com/v3/capsules', (post)=>{
     startingIndex=4*page-4;
     endIndex=4*page;
     let data=post.slice(startingIndex,endIndex);
-    this.setState({currentPage:page,currentData:data});
+    this.setState({currentPage:page,currentData:data,startingIndex:startingIndex,endIndex:endIndex});
   }
   render(){
       let {post,totalItem,totalPage,currentData,startingPage,currentPage}=this.state;
