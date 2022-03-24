@@ -14,46 +14,37 @@ export default class SelectedTable extends React.Component{
     }
       render(){
           let {post}=this.state;
-          console.log(post.missions);
+         console.log(post);
           return(
               <div>
-                  <List>
-                      <ListItem>
+                  {post===undefined ? "" :<List>
+                      {post.capsule_serial ? <ListItem>
                             <ListItemText primary= {"Capsule Serial: "+post.capsule_serial}/>
-                       </ListItem>
-                       <ListItem>
+                       </ListItem> :""}
+                       {post.capsule_id ? <ListItem>
                             <ListItemText primary= {"Capsule ID: " +post.capsule_id}/>
-                       </ListItem>
-                       <ListItem>
+                       </ListItem>:""}
+                       {post.details ? <ListItem>
                             <ListItemText primary= {"Details: "+post.details}/>
-                       </ListItem>
-                       <ListItem>
+                       </ListItem>:""}
+                       {post.original_launch ? <ListItem>
                             <ListItemText primary= {"Original Launch: "+post.original_launch}/>
-                       </ListItem>
-                       <ListItem>
+                       </ListItem>:""}
+                       {post.status ? <ListItem>
                             <ListItemText primary= {"Status: "+post.status}/>
-                       </ListItem>
-                       <ListItem>
+                       </ListItem>:""}
+                       {post.type ? <ListItem>
                             <ListItemText primary= {"Type: "+post.type}/>
-                       </ListItem> 
-                       <ListItem>
+                       </ListItem>:""}
+                        {post.missions ? <ListItem>
                             <ListItemText primary= "Missions:"/>
-                            <ListItem>
-                                {post.missions !== undefined ? post.missions.map(n=><ListItemText primary={"{name:"+ n.name +", flight: "+n.flight+"}"}/>):""}
-                            </ListItem>
-                       </ListItem>                    
-                  </List>
-                  {/* <ul>
-                      <li>Capsule Serial: {post.capsule_serial}</li>
-                      <li>Capsule ID: {post.capsule_id}</li>
-                      <li>Details : {post.details}</li>
-                      <li>Original Launch: {post.original_launch}</li>
-                      <li>Status: {post.status}</li>
-                      <li>Type: {post.type}</li>
-                      <li>Missions: </li>
-                      {post.missions !== undefined ? <ul>{post.missions.map(n=><li>Names:{n.name}, flight:{n.flight}</li>)}</ul>:""}
-
-                  </ul> */}
+                            
+                       </ListItem>:""}
+                       <ul>
+                       {post.missions !== undefined ? post.missions.map(n=><li style={{textAlign:"left"}}>name:{n.name} flight:{n.flight}</li>):""}
+                   </ul>
+                                           
+                  </List> }
               </div>
           )
       }
